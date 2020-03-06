@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 sudo cp /usr/local/Cellar/mongodb/2.2.0-x86_64/homebrew.mxcl.mongodb.plist /Library/LaunchDaemons/
 sudo cp com.countly.dashboard.plist /Library/LaunchDaemons/

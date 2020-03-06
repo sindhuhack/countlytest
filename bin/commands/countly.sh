@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #get current dir through symlink
 SOURCE="${BASH_SOURCE[0]}"
@@ -112,7 +112,7 @@ countly_upgrade (){
     then
         (cd "$DIR/../.." ;
         echo "Installing dependencies...";
-        sudo npm install ;
+        npm install ;
         echo "Preparing production files...";
         countly task dist-all;
         echo "Restarting Countly...";

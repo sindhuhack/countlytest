@@ -1220,7 +1220,7 @@ common.getIpAddress = function(req) {
                 return ips[i].startsWith(elem);
             });
         }
-        if (ips[i] !== "127.0.0.1" && (!countlyConfig.ignoreProxies || !masks)) {
+        if (ips[i] !== countlyConfig.api.host && (!countlyConfig.ignoreProxies || !masks)) {
             ip = ips[i];
             break;
         }

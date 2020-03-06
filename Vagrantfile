@@ -53,13 +53,13 @@ Vagrant.configure("2") do |config|
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
 #  config.vm.provision "shell" do |s|
-#    s.inline = "cd /opt/countly && npm rebuild && /bin/bash /opt/countly/bin/countly.install.sh"
+#    s.inline = "cd /opt/countly && npm rebuild && bash /opt/countly/bin/countly.install.sh"
 #    s.privileged = true
 #  end
   config.vm.provision "shell" do |s|
     s.inline = <<-SHELL
       cd /opt/countly
-      /bin/bash /opt/countly/bin/countly.install.sh
+      /opt/countly/bin/countly.install.sh
       # in case you've built the project on your host, you need to rebuild (possibly different platform)
       npm rebuild
       countly restart

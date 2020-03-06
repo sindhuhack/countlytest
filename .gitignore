@@ -1,6 +1,7 @@
 api/node_modules/
 .idea
-*_en.properties
+log
+*.properties
 frontend/express/node_modules/
 api/config.js
 countly_marked_version.json
@@ -12,6 +13,7 @@ frontend/express/public/localization/min
 frontend/express/public/stylesheets/*.min.css
 plugins/plugins.json
 frontend/express/public/sdk/
+package-lock.json
 **/.DS_Store
 **/node_modules
 bin/scripts/nghttp2
