@@ -10,7 +10,20 @@ done
 DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
 #get current countly version
-VERSION="$(grep -oP 'version:\s*"\K[0-9\.]*' "$DIR/../../frontend/express/version.info.js")"
+VERSION="$(egrep -o 'version: *"[0-9\.]+"' "$DIR/../../frontend/express/version.info.js" | sed -E -e 's,^version: *"([0-9\.]+)"$,\1,')"
+
+#Activate our nodejs, if using nodeenv
+if [ -x "$DIR/../../.nodeenv/bin/activate" ]
+then
+    #Ugh, everyone wants to use "SOURCE" and "DIR" for their stuff, so save ours.
+    SAVED_SOURCE="$SOURCE"
+    SAVED_DIR="$DIR"
+    source "$DIR/../../.nodeenv/bin/activate"
+    DIR="$SAVED_DIR"
+    SOURCE="$SAVED_SOURCE"
+    unset SAVED_SOURCE
+    unset SAVED_DIR
+fi
 
 export LANGUAGE=C ; export LC_ALL=C ;
 

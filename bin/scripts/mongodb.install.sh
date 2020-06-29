@@ -1,7 +1,11 @@
 #!/bin/bash
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-MONGODB_CONFIG_FILE="/etc/mongod.conf"
+if [ ! -z "$1" -a -d "$(dirname "$1")" -a "$(basename "$1")" = "mongod.conf" ]; then
+	MONGOD_CONF="$1"
+else
+	MONGOD_CONF=/etc/mongod.conf
+fi
 
 function mongodb_configure () {
     cp "$MONGODB_CONFIG_FILE" "$MONGODB_CONFIG_FILE".bak

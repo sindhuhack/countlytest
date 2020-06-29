@@ -6,7 +6,7 @@
         <true/>
         <key>ProgramArguments</key>
         <array>
-                <string>/usr/local/bin/node</string>
+                <string>/usr/local/countly/.nodeenv/bin/shim</string>
                 <string>/usr/local/countly/api/api.js</string>
         </array>
         <key>Label</key>

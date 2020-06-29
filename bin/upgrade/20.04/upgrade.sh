@@ -1,9 +1,13 @@
 #!/bin/bash
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 DATE=$(date +%Y-%m-%d:%H:%M:%S)
-VERSION="$(basename "${DIR}")" 
+VERSION="$(basename "${DIR}")"
 
 countly stop
+if [ -d "$DIR/.nodeenv" ]; then
+    source "$DIR/.nodeenv/bin/activate"
+    DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+fi
 if [ -f "$DIR/upgrade_fs.sh" ]; then
     bash "$DIR/upgrade_fs.sh" combined 2>&1 | tee -a "$DIR/../../../log/countly-upgrade-fs-$VERSION-$DATE.log"
 fi

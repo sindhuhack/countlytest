@@ -1,21 +1,21 @@
 #!/bin/bash
 
-countly_start () { 
-    launchctl start com.countly.api;
-    launchctl start com.countly.dashboard;
+countly_start () {
+    sudo launchctl start com.countly.api
+    sudo launchctl start com.countly.dashboard
 }
 
 countly_stop () { 
-    launchctl stop com.countly.api;
-    launchctl stop com.countly.dashboard;
+    sudo launchctl stop com.countly.dashboard
+    sudo launchctl stop com.countly.api
 }
 
 countly_restart () {
-    countly start;
-    countly stop;
+    countly_stop
+    countly_start
 }
 
 countly_status () { 
-    launchctl list | grep com.countly.api;
-    launchctl list | grep com.countly.dashboard;
+    sudo launchctl list | grep com.countly.api
+    sudo launchctl list | grep com.countly.dashboard
 }
