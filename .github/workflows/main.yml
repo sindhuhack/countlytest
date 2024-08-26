@@ -64,7 +64,7 @@ jobs:
 
     services:
       mongodb:
-        image: mongo:6.0
+        image: mongo:7.0
         options: >-
           --health-cmd mongosh
           --health-interval 10s
@@ -121,7 +121,7 @@ jobs:
 
     services:
       mongodb:
-        image: mongo:6.0
+        image: mongo:7.0
         options: >-
           --health-cmd mongosh
           --health-interval 10s
@@ -155,6 +155,11 @@ jobs:
         shell: bash
         run: "sed -i 's/port: 3001,/port: 3001, workers: 1,/' /opt/countly/api/config.js"
 
+      - name: NPM install
+        shell: bash
+        working-directory: /opt/countly
+        run: npm install
+
       - name: Run tests
         shell: bash
         working-directory: /opt/countly
@@ -168,7 +173,7 @@ jobs:
 
     services:
       mongodb:
-        image: mongo:6.0
+        image: mongo:7.0
         options: >-
           --health-cmd mongosh
           --health-interval 10s
@@ -202,6 +207,11 @@ jobs:
         shell: bash
         run: "sed -i 's/port: 3001,/port: 3001, workers: 1,/' /opt/countly/api/config.js"
 
+      - name: NPM install
+        shell: bash
+        working-directory: /opt/countly
+        run: npm install
+
       - name: Install plugins
         shell: bash
         run: |
@@ -221,7 +231,7 @@ jobs:
 
     services:
       mongodb:
-        image: mongo:6.0
+        image: mongo:7.0
         options: >-
           --health-cmd mongosh
           --health-interval 10s
@@ -254,6 +264,11 @@ jobs:
       - name: Prepare files to use correct MongoDB host
         shell: bash
         run: "sed -i 's/mongosh --quiet/mongosh --host mongodb --quiet/' /opt/countly/bin/backup/import_events.sh && sed -i 's/mongoimport --db/mongoimport --host mongodb --db/' /opt/countly/bin/backup/import_events.sh"
+
+      - name: NPM install
+        shell: bash
+        working-directory: /opt/countly
+        run: npm install
 
       - name: Prepare environment
         shell: bash
@@ -331,6 +346,11 @@ jobs:
       - name: Prepare files to use correct MongoDB host
         shell: bash
         run: "sed -i 's/mongosh --quiet/mongosh --host mongodb --quiet/' /opt/countly/bin/backup/import_events.sh && sed -i 's/mongoimport --db/mongoimport --host mongodb --db/' /opt/countly/bin/backup/import_events.sh"
+
+      - name: NPM install
+        shell: bash
+        working-directory: /opt/countly
+        run: npm install
 
       - name: Prepare environment
         shell: bash

@@ -876,6 +876,6 @@ const FEATURE_NAME = 'populator';
         });
     }
 
-}(exported));
+}());
 
 module.exports = exported;
