@@ -284,10 +284,13 @@ plugins.register("/i/hook/save", function(ob) {
         try {
             hookConfig = JSON.parse(hookConfig);
             hookConfig = sanitizeConfig(hookConfig);
-            if (!(common.validateArgs(hookConfig, CheckHookProperties(hookConfig)))) {
-                common.returnMessage(params, 400, 'Not enough args');
-                return true;
-            }
+            if (hookConfig) {
+                // Null check for hookConfig
+                if (!(common.validateArgs(hookConfig, CheckHookProperties(hookConfig)))) {
+                    common.returnMessage(params, 400, 'Not enough args');
+                    return true;
+                }
+            
 
             if (hookConfig.effects && !validateEffects(hookConfig.effects)) {
                 common.returnMessage(params, 400, 'Invalid configuration for effects');
@@ -311,6 +314,7 @@ plugins.register("/i/hook/save", function(ob) {
                         }
                     });
             }
+        }
             hookConfig.createdBy = params.member._id;
             hookConfig.created_at = new Date().getTime();
             return common.db.collection("hooks").insert(
@@ -577,13 +581,15 @@ plugins.register("/i/hook/test", function(ob) {
             hookConfig = sanitizeConfig(hookConfig);
             const mockData = JSON.parse(params.qstring.mock_data);
 
-            if (!(common.validateArgs(hookConfig, CheckHookProperties(hookConfig)))) {
+            if (!hookConfig || !(common.validateArgs(hookConfig, CheckHookProperties(hookConfig)))) {
                 common.returnMessage(params, 403, "hook config invalid");
             }
 
-            if (hookConfig.effects && !validateEffects(hookConfig.effects)) {
-                common.returnMessage(params, 400, 'Config invalid');
-                return true;
+            if (hookConfig) {
+                // Null check for hookConfig
+                if (hookConfig.effects && !validateEffects(hookConfig.effects)) {
+                    common.returnMessage(params, 400, 'Config invalid');
+                }
             }
 
             // trigger process            
